@@ -20,6 +20,7 @@ const readCounter = (callback) => {
     if (err) {
       callback(null, 0);
     } else {
+      console.log('readCounter + fileData: ' + fileData);
       callback(null, Number(fileData));
     }
   });
@@ -31,7 +32,9 @@ const writeCounter = (count, callback) => {
     if (err) {
       throw ('error writing counter');
     } else {
+      console.log('writeCounter + counterString' + counterString);
       callback(null, counterString);
+      // fix this callback somehow?
     }
   });
 };
@@ -40,10 +43,21 @@ const writeCounter = (count, callback) => {
 
 exports.getNextUniqueId = () => {
   counter = counter + 1;
+  // writeCounter(counter, () => {
+  //   console.log(counter);
+  // });
+  // readCounter(() => {
+  //   console.log(counter);
+  // });
+  // implement updating of counter
+
   return zeroPaddedNumber(counter);
 };
 
-
+// getNextUniqueId - takes current counter, increments it
+// invoke writeCounter? update the counter.txt files with the updated local var counter
+// invoke readCounter? to return the updated counter.txt
+// need for callbacks? maybe a console.log for success?
 
 // Configuration -- DO NOT MODIFY //////////////////////////////////////////////
 
