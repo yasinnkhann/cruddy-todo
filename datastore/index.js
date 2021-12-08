@@ -28,6 +28,7 @@ exports.readAll = (callback) => {
 
   // SOLVED VIA PROMISES
   const promises = [];
+
   fs.readdir(exports.dataDir, (err, data) => {
     if (data.length === 0) {
       callback(null, promises);
@@ -39,15 +40,28 @@ exports.readAll = (callback) => {
       promiseFs.readFileAsync(filePath, 'utf-8')
         .then(text => {
           promises.push({ id, text })
-          if (promises.length === data.length) {
-            Promise.all(promises)
-              .then(todos => callback(null, todos))
-              .catch(err => callback(err, null))
+          if(promises.length === data.length) {
+            const orderedPromises = promises.sort((a, b) => a.id - b.id);
+            callback(null, orderedPromises);
           }
         });
     }
   })
-
+  //// FIX
+  //     for (let i = 0; i < data.length; i++) {
+  //     let fileName = data[i];
+  //     let filePath = `${exports.dataDir}/${fileName}`;
+  //     let id = fileName.slice(0, -4);
+  //     promises.push(promiseFs.readFileAsync(filePath, 'utf-8')
+  //       .then(text => {
+  //         return { id, text }
+  //       })
+  //     )
+  //   }
+  //   Promise.all(promises)
+  //     .then(todos => callback(null, todos))
+  //     .catch(err => callback(err, null))
+  // })
   // // SOLVED VIA CALLBACKS
   // const arr = [];
 
