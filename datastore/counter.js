@@ -34,7 +34,6 @@ const writeCounter = (count, callback) => {
     } else {
       console.log('writeCounter + counterString' + counterString);
       callback(null, counterString);
-      // fix this callback somehow?
     }
   });
 };
@@ -56,11 +55,6 @@ exports.getNextUniqueId = (callback) => {
     }
   });
 };
-
-// getNextUniqueId - takes current counter, increments it
-// invoke writeCounter? update the counter.txt files with the updated local var counter
-// invoke readCounter? to return the updated counter.txt
-// need for callbacks? maybe a console.log for success?
 
 // Configuration -- DO NOT MODIFY //////////////////////////////////////////////
 
